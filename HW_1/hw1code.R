@@ -38,6 +38,8 @@ data1$scode <- factor(data1$scode)
 dt[,.(Count=.N, CTR=mean(Clicks/Impressions)),
    .(scode, Gender, agecat)][order(scode, Gender, agecat)]
 
+
+# PLOT AND SAVE JPG
 # Plot Avg Age of Viewers
 print(ggplot(dt[Age != 0,.(AvgAge=mean(Age)),.(Day, Gender)], 
        aes(y=AvgAge, x=Day, colour=factor(Gender))) + geom_line() + 
@@ -62,10 +64,5 @@ print(ggplot(dt[Impressions != 0,.(AvgCTR=mean(cthru, na.rm=TRUE)),.(Day, agecat
     ggtitle('Average CTR Between AgeGroups') )
 dev.copy(jpeg,filename='CTR_Between_Ages.jpg')
 dev.off()
-
-
-
-
-
 
 
